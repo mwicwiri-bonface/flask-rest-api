@@ -40,6 +40,7 @@ products_schema = ProductSchema(many=True)
 
 @app.route('/products/', methods=['POST'])
 def add_product():
+    """ Add a new product """
     name = request.json['name']
     description = request.json['description']
     price = request.json['price']
@@ -54,6 +55,7 @@ def add_product():
 
 @app.route('/products/', methods=['GET'])
 def get_products():
+    """ Get all products """
     all_products = Product.query.all()
     result = products_schema.dump(all_products)
     return products_schema.jsonify(result)
@@ -61,12 +63,14 @@ def get_products():
 
 @app.route('/products/<id>', methods=['GET'])
 def get_product(id):
+    """ Get a single product """
     product = Product.query.get(id)
     return product_schema.jsonify(product)
 
 
 @app.route('/products/<id>', methods=['PUT'])
 def update_product(id):
+    """ Update a product """
     product = Product.query.get(id)
 
     name = request.json['name']
