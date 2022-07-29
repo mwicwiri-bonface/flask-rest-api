@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -13,6 +14,8 @@ app.config['SECRET_KEY'] = 'mysecret'
 # init db
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+migrate = Migrate(app, db)
 
 
 class Product(db.Model):
